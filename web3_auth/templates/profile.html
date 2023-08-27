@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Django Profile Page Demo</title>
+</head>
+<body style="background: #eeeeee; padding-left:10%">
+    <div>
+
+    {% if user.is_authenticated %}
+        <h1 style="align-content: center"><span style="background:#e6c3c9">Eth address:</span> {{ user.username }}</h1>
+        <h3 style="align-content: center;background: #e6c3c9;width: 30%;font-size: 30px;text-align: center;">Session Auth Info</h3>
+        <table width="200px" border="0px" padding="5px">
+        {% for key,value in request.session.auth_info.items %}
+            <tr><td>{{key}}</td><td><pre>{{ value }}</pre></td></tr>
+        {% endfor %}
+        </table>
+        <table width="200px" border="0px" padding="0px">
+        <h3 style="align-content: center;background: #e6c3c9;width: 30%;font-size: 30px;text-align: center;">Verified User Info</h3>
+        {% for key,value in request.session.verified_data.items %}
+            <tr><td>{{key}}</td><td>{{ value }}</td></tr>
+        {% endfor %}
+
+        </table>
+        <br/>
+
+        <a style="font-size:45px;background: linear-gradient(120deg,#f14c4c,#5a50ba);color: #e2e2e2;" href="/auth/logout/?next=/web3_auth/moralis_auth">Logout</a>
+    {% else %}
+        <a href="{% url 'moralis_auth' %}"> Login page </a>
+    {% endif %}
+    </div>
+
+</body>
+</html>
