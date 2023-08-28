@@ -35,11 +35,11 @@ pickleshare
 Pillow
 pure-eval
 platformdirs
-plotly
+plotly==5.16.1
 prometheus-client==0.17.1
 jsonschema-specifications==2023.7.1
 parsimonious
-py-evm
+py-evm==0.5.0a3
 prompt-toolkit
 protobuf
 psutil
