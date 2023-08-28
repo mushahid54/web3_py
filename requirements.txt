@@ -39,7 +39,7 @@ plotly==5.16.1
 prometheus-client==0.17.1
 jsonschema-specifications==2023.7.1
 parsimonious
-py-evm==0.5.0a3
+py-evm
 prompt-toolkit
 protobuf
 psutil
