@@ -1,4 +1,5 @@
 Django==1.11.17
 djangorestframework==3.6.2
 gunicorn==21.2.0
+moralis
 web3
