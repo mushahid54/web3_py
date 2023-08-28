@@ -13,8 +13,7 @@ from web3_auth.mixin import CustomMetaDataMixin
 from web3_task.settings.base import get_secret
 from web3.logs import DISCARD
 
-API_KEY = get_secret("API_KEY")
-
+API_KEY = "NtznkT0fM89IIuoHGXwCgDburQUsD8aAdOaydhsHk73RDYfnI2BWGWd0f7X7cC5z"
 def authentication(request):
     return render(request, 'login.html', {})
 
@@ -88,13 +87,12 @@ class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
             checksum_address = Web3.toChecksumAddress(address)
             contract = w3.eth.contract(address=checksum_address,abi=abi_json)
             block_number = w3.eth.blockNumber
-            latest_block = w3.eth.getBlock(block_number).transactions[:10]  #First 10 trx
-            latest_block_list = self._get_latest_block_transacation(latest_block)
-            return Response({"dict_info": {"transfer_details": latest_block_list,}}, status=status.HTTP_200_OK)
-
-    def _get_latest_block_transacation(self, latest_block):
+            latest_transaction = w3.eth.getBlock(block_number).transactions[:10]  #First 10 trx
+            latest_transaction_list = self._get_latest_block_transacation(latest_transaction)
+            return Response({"dict_info": {"transfer_details": latest_transaction_list,}}, status=status.HTTP_200_OK)
+    def _get_latest_block_transacation(self, latest_transaction):
         latest_block_list = []
-        for trx_hash in latest_block:
+        for trx_hash in latest_transaction:
             params = {"chain": "eth", "transaction_hash": trx_hash.hex()}
             result_logs = evm_api.transaction.get_transaction_verbose(api_key=API_KEY, params=params, )
             for log_event in result_logs.get('logs', []):
