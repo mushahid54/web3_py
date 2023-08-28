@@ -78,7 +78,7 @@ class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
     """
     SWAP = "Swap"
     def list(self, request, format=None):
-        infura_url = get_secret("infura_url")
+        # infura_url = get_secret("infura_url")
         infura_url = "https://mainnet.infura.io/v3/075829e0a6ab486680b1f0970943c3a2"
         w3 = Web3(Web3.HTTPProvider(infura_url))
         check_connection = w3.isConnected()
