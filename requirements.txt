@@ -68,8 +68,8 @@ stack-data
 typing-extensions
 tenacity
 urllib3
-ujson
-web3
+ujson==5.8.0
+web3==5.31.4
 web3-ethereum-defi
 webcolors
 webencodings
