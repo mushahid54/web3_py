@@ -31,7 +31,7 @@ sqlparse==0.4.4
 stack-data==0.6.2
 typing_extensions==4.3.0
 urllib3==1.26.16
-web3==5.31.4
+web3==5.28.0
 web3-ethereum-defi==0.11.3
 webcolors==1.13
 webencodings==0.5.1
