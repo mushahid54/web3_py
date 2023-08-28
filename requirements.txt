@@ -65,7 +65,7 @@ semantic-version
 six
 sqlparse
 stack-data
-typing-extensions
+typing_extensions==4.3.0
 tenacity
 urllib3
 ujson==5.8.0
@@ -78,3 +78,4 @@ websockets
 widgetsnbextension
 yarl
 zipp
+trie
