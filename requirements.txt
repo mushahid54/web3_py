@@ -69,7 +69,6 @@ typing-extensions
 tenacity
 urllib3
 ujson
-toolz
 web3
 web3-ethereum-defi
 webcolors
