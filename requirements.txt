@@ -28,7 +28,7 @@ jsonpointer
 jsonschema
 lru-dict
 MarkupSafe
-moralis
+moralis==0.1.37
 multiaddr
 multidict
 pickleshare
