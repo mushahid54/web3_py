@@ -66,7 +66,7 @@ sqlparse
 stack-data
 typing_extensions==4.3.0
 tenacity==6.3.1
-trie==2.0.1
+trie==2.0.0a5
 urllib3==1.26.7
 ujson==5.8.0
 web3==5.20.1
