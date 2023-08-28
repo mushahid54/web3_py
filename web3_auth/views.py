@@ -95,20 +95,23 @@ class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
         latest_block_list = []
         for trx_hash in latest_transaction:
             params = {"chain": "eth", "transaction_hash": trx_hash.hex()}
-            result_logs = evm_api.transaction.get_transaction_verbose(api_key=API_KEY, params=params, )
-            for log_event in result_logs.get('logs', []):
-                try:
-                    decoded_swap_events = log_event['decoded_event']
-                    if decoded_swap_events.get('label', None) == self.SWAP:
-                        swap_token_dict = {
-                            "topic0": log_event.get('topic0', None),
-                            "topic1": log_event.get('topic1', None),
-                            "topic2": log_event.get('topic2', None),
-                            "log_event": log_event['decoded_event']
-                        }
-                        latest_block_list.append(swap_token_dict)
-                except AttributeError:
-                    pass
+            try:
+                result_logs = evm_api.transaction.get_transaction_verbose(api_key=API_KEY, params=params, )
+                for log_event in result_logs.get('logs', []):
+                    try:
+                        decoded_swap_events = log_event['decoded_event']
+                        if decoded_swap_events.get('label', None) == self.SWAP:
+                            swap_token_dict = {
+                                "topic0": log_event.get('topic0', None),
+                                "topic1": log_event.get('topic1', None),
+                                "topic2": log_event.get('topic2', None),
+                                "log_event": log_event['decoded_event']
+                            }
+                            latest_block_list.append(swap_token_dict)
+                    except AttributeError:
+                        pass
+            except Exception:
+                pass
 
         return latest_block_list
 
