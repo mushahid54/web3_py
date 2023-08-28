@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auth Django Profile Page Demo</title>
+</head>
+<body style="background: #eeeeee; padding-left:10%">
+    <div>
+
+    {% if user.is_authenticated %}
+        {% for key,value in latest_block_list %}
+            <tr><td>{{key}}</td><td><pre>{{ value }}</pre></td></tr>
+        {% endfor %}
+        <h1 style="align-content: center"><span style="background:#e6c3c9">Eth address:</span></h1>
+
+    {% else %}
+        <a href="{% url 'authentication' %}"> Login page </a>
+    {% endif %}
+    </div>
+
+</body>
+</html>

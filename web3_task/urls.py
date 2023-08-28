@@ -19,6 +19,6 @@ from django.contrib import admin
 
 urlpatterns = [
     url('admin/', admin.site.urls),
-    url('web3_auth/', include('web3_auth.urls')),
+    url('api/v1/', include('web3_auth.urls')),
     url('auth/', include('django.contrib.auth.urls')),
 ]

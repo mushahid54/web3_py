@@ -26,9 +26,9 @@
         </table>
         <br/>
 
-        <a style="font-size:45px;background: linear-gradient(120deg,#f14c4c,#5a50ba);color: #e2e2e2;" href="/auth/logout/?next=/web3_auth/moralis_auth">Logout</a>
+        <a style="font-size:45px;background: linear-gradient(120deg,#f14c4c,#5a50ba);color: #e2e2e2;" href="/auth/logout/?next=/api/v1/authentication">Logout</a>
     {% else %}
-        <a href="{% url 'moralis_auth' %}"> Login page </a>
+        <a href="{% url 'authentication' %}"> Login page </a>
     {% endif %}
     </div>
 

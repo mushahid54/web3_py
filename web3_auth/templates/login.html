@@ -4,7 +4,7 @@
  <meta charset="UTF-8">
  <meta http-equiv="X-UA-Compatible" content="IE=edge">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Moralis Auth Django Rest Demo</title>
+ <title>Web3 Auth Django Rest Demo</title>
 </head>
 <body style="background: #fff; padding-left:10%">
  <div>
@@ -12,10 +12,11 @@
  {% if user.is_authenticated %}
  <h1 style="font-size: 35px">Welcome Web3 Metamask User, {{ user.username }} !</h1>
  <a style="font-size: 30px" href="{% url 'my_profile' %}"> My profile </a> <br/><br/>
- <a style="font-size: 30px" href="{% url 'logout' %}?next={% url 'moralis_auth' %}">Logout</a>
+ <a style="font-size: 30px" href="{% url 'logout' %}?next={% url 'authentication' %}">Logout</a> <br/><br/>
+<!-- <a style="font-size: 30px" href="{% url 'decode_swap_token' %}">Get Swap Token</a>-->
  {% else %}
- <h1>Web3 Login Django Rest demo</h1>
- <button class="btn" id="auth-metamask" style="font-size: 30px;background: linear-gradient(120deg,#f14c4c,#5a50ba);color: #e2e2e2;font-size: 30px;">Login with Moralis Web3 API</button>
+ <h1>Web3 Login Django Rest Demo</h1>
+ <button class="btn" id="auth-metamask" style="font-size: 30px;background: linear-gradient(120deg,#f14c4c,#5a50ba);color: #e2e2e2;font-size: 30px;">Login with Web3 API</button>
  {% endif %}
  </div>
 
