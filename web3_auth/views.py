@@ -87,7 +87,7 @@ class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
         if check_connection:
             # checksum_address = w3.toChecksumAddress(address)
             contract = w3.eth.contract(address=address,abi=abi_json)
-            block_number = w3.eth.blockNumber
+            block_number = w3.eth.block_number
             latest_transaction = w3.eth.getBlock(block_number).transactions[:10]  #First 10 trx
             latest_transaction_list = self._get_latest_block_transacation(latest_transaction)
             return Response({"dict_info": {"transfer_details": latest_transaction_list,}}, status=status.HTTP_200_OK)
