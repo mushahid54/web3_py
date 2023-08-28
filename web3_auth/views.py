@@ -72,12 +72,13 @@ def verify_message(request):
     else:
         return JsonResponse(json.loads(x.text))
 
+
 class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
     """
     API will let you retrieve swap events of address, while fetching the transaction and log.
     """
-    def get(self, request, format=None):
-        latest_block_list = []
+    SWAP = "Swap"
+    def list(self, request, format=None):
         infura_url = get_secret("infura_url")
         w3 = Web3(Web3.HTTPProvider(infura_url))
         check_connection = w3.isConnected()
@@ -88,23 +89,29 @@ class DecodeSwapTokenAPIViews(CustomMetaDataMixin,generics.ListAPIView):
             contract = w3.eth.contract(address=checksum_address,abi=abi_json)
             block_number = w3.eth.blockNumber
             latest_block = w3.eth.getBlock(block_number).transactions[:10]  #First 10 trx
-            for trx_hash in latest_block:
-                params = {"chain": "eth","transaction_hash": trx_hash.hex()}
-                result_logs = evm_api.transaction.get_transaction_verbose(api_key=API_KEY,params=params,)
-                for log_event in result_logs.get('logs', []):
-                    try:
-                        decoded_swap_events = log_event['decoded_event']
-                        if decoded_swap_events.get('label', None) == "Swap":
-                            swap_token_dict = {
-                                "topic0": log_event.get('topic0', None),
-                                "topic1": log_event.get('topic1', None),
-                                "topic2": log_event.get('topic2', None),
-                                "log_event": log_event['decoded_event']
-                            }
-                            latest_block_list.append(swap_token_dict)
-                    except AttributeError:
-                        pass
+            latest_block_list = self._get_latest_block_transacation(latest_block)
             return Response({"dict_info": {"transfer_details": latest_block_list,}}, status=status.HTTP_200_OK)
+
+    def _get_latest_block_transacation(self, latest_block):
+        latest_block_list = []
+        for trx_hash in latest_block:
+            params = {"chain": "eth", "transaction_hash": trx_hash.hex()}
+            result_logs = evm_api.transaction.get_transaction_verbose(api_key=API_KEY, params=params, )
+            for log_event in result_logs.get('logs', []):
+                try:
+                    decoded_swap_events = log_event['decoded_event']
+                    if decoded_swap_events.get('label', None) == self.SWAP:
+                        swap_token_dict = {
+                            "topic0": log_event.get('topic0', None),
+                            "topic1": log_event.get('topic1', None),
+                            "topic2": log_event.get('topic2', None),
+                            "log_event": log_event['decoded_event']
+                        }
+                        latest_block_list.append(swap_token_dict)
+                except AttributeError:
+                    pass
+
+        return latest_block_list
 
 # class Web3LearningAPIViews(CustomMetaDataMixin, generics.ListAPIView):
 #
